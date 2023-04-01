@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Student Marks</title>
+    <style>
+        tr{
+            text-align: center;
+        }
+    </style>
+
+    <script>
+
+        function Total_Marks()
+        {
+            // Declare Variables to get values from txetbox
+            var sub1 = parseInt(document.getElementById("txtSub1").value);
+            var sub2 = parseInt(document.getElementById("txtSub2").value);
+            var sub3 = parseInt(document.getElementById("txtSub3").value);
+            var sub4 = parseInt(document.getElementById("txtSub4").value);
+            var sub5 = parseInt(document.getElementById("txtSub5").value);
+            var sub6 = parseInt(document.getElementById("txtSub6").value);
+
+            // Total Marks
+            var Total = sub1 + sub2 + sub3 + sub4 + sub5 + sub6;
+
+            document.getElementById("txtTotal").value=Total;
+
+            //Percentage
+
+            var Percentage = Total * (100/600);
+
+            document.getElementById("txtPercentage").value=Percentage.toFixed(2); 
+        }
+
+    </script>
+
+
+
+</head>
+
+<body>
+
+    <center>
+
+    <table  border="1px solid black" style="border-collapse: collapse;">
+        <tr style="background-color: #ADDFFF;">
+            <td colspan="4">
+                Mark Sheet
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="4" style="background-color: gainsboro;">
+                Student Name : Riya Sharma
+            </td>
+        </tr>
+
+        <tr style="background-color: gainsboro;">
+            <td>Subject</td>
+            <td>Max Marks</td>
+            <td>Min Marks</td>
+            <td>Obtained Marks</td>
+        </tr>
+
+        <tr>
+            <td>Maths</td>
+            <td>100</td>
+            <td>35</td>
+            <td ><input type="text" id="txtSub1" /></td>
+        </tr>
+
+        <tr>
+            <td>Physics</td>
+            <td>100</td>
+            <td>35</td>
+            <td ><input type="text" id="txtSub2" /></td>
+        </tr>
+
+        <tr>
+            <td>Chemisty</td>
+            <td>100</td>
+            <td>35</td>
+            <td ><input type="text" id="txtSub3" /></td>
+        </tr>
+
+        <tr>
+            <td>English</td>
+            <td>100</td>
+            <td>35</td>
+            <td ><input type="text" id="txtSub4" /></td>
+        </tr>
+
+        <tr>
+            <td>History</td>
+            <td>100</td>
+            <td>35</td>
+            <td ><input type="text" id="txtSub5" /></td>
+        </tr>
+
+        <tr>
+            <td>IT</td>
+            <td>100</td>
+            <td>35</td>
+            <td ><input type="text" id="txtSub6" /></td>
+        </tr>
+
+         <tr style="background-color: gainsboro;">
+            <td><input type="button" value="Total" id="totalMarks" onclick="Total_Marks()" style="height: 30px; width: 90px; background-color: gainsboro;"/></td>
+            <td>600</td>
+            <td>210</td>
+            <td ><input type="text" id="txtTotal" style="background-color: gainsboro; height: 17px; width: 170px;"/></td>
+        </tr>
+
+        <tr style="background-color: gainsboro;">
+            <td>Percentage</td>
+            <td> </td>
+            <td></td>
+            <td><input type="text" id="txtPercentage" style="background-color: gainsboro; height: 15px; width: 170px;"/></td>
+        </tr>
+
+
+
+
+    </table>
+
+    </center>
+
+</body>
+
+</html>

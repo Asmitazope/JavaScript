@@ -1,0 +1,199 @@
+<html>
+	<head>
+        <style>
+            tr{
+                text-align: center;
+            }
+        </style>
+		<script>
+			var daysinmonths =[31,28,31,30,31,30,31,31,30,31,30,31];
+			var daysinWeek=["SUN","MON","TUE","WED","THR","FRI","SAT"];
+			var d=0;
+			var m=0;
+			var y=0;
+
+            //function1 start
+			function getDayOfTheWeek()
+			{
+				var dcntrl= document.getElementById("selDay");
+				var mcntrl= document.getElementById("selMonth");
+				var ycntrl= document.getElementById("txtYear");
+				var res= document.getElementById("result");
+				//alert(dcntrl);
+				//alert(dcntrl.selectedIndex);
+				d= dcntrl.options[dcntrl.selectedIndex].text;
+				m= mcntrl.options[mcntrl.selectedIndex].value;
+				y= ycntrl.value;
+
+
+				var y_1 = parseInt(y-1);
+				var y4 =  parseInt((y_1)/4);
+				var y100 = parseInt((y_1)/100);
+				var y400 =  parseInt((y_1)/400);
+				
+				var temp1= y_1 + y4- y100 + y400;
+				var tempMonthsum = 0;
+
+				if(parseInt(y) % 4==0)
+                {
+                    daysinmonths[1]=29;
+                }
+
+				for(var i=0;i<parseInt(m)-1;i++)
+				{
+					tempMonthsum = tempMonthsum + daysinmonths[i];
+				}
+
+				//alert(y4);
+
+
+				var  temp2= temp1 + tempMonthsum + parseInt(1);
+				var dayofweek=  temp2 % 7;
+
+
+				return dayofweek;
+				//res.innerHTML= daysinWeek[dayofweek];
+
+			}
+            // function 1 end
+
+            //function2 start
+            function viewMonth()
+            {
+                // variable to create month table and row using createElement() method of JS
+                var monthTable = document.createElement('table');
+                var row1 = document.createElement('tr');
+
+
+                // create table headers to display days of weeks
+                for (var i=0; i<daysinWeek.length; i++)
+                {
+                    var colsheader = document.createElement('td');
+                    colsheader.innerHTML = daysinWeek[i];
+                    // adding colsheader to row1
+                    row1.appendChild(colsheader);
+                }
+
+                // aading row1 to monthTable
+                monthTable.appendChild(row1);
+
+                
+                // calling getDayOfTheWeek function to get the day
+                var firstDayVal = getDayOfTheWeek();
+
+                // create new row
+                var rown = document.createElement('tr');
+
+                // setting initialCount to firstDayVal
+                var initialCount = firstDayVal;
+
+                // create new td 
+                var colsblank =  document.createElement('td');
+
+                colsblank.colSpan = firstDayVal;
+                colsblank.innerHTML="";
+
+                // adding colsblank to rown
+                rown.appendChild(colsblank)
+
+
+                // Adding Dates to the calender table
+
+                // check if the months starts from SUNDAY or from the middle
+
+                for(j=0; j<daysinmonths[m-1];j++)
+                {
+                    // if the 
+                    if((j + firstDayVal) % 7 == 0)
+                    {
+                        monthTable.appendChild(rown);
+                        rown = null;
+                        rown =  document.createElement('tr');
+                    }
+
+                    // create column to display selected date
+                    var colstd = document.createElement('td');
+                    colstd.innerHTML = j + 1;
+
+                    // if its selected date highlight it
+                    if(d == j+1)
+                    {
+                        colstd.style.backgroundColor="#fff000";
+                    }
+
+                    // append colstd to rown
+                    rown.appendChild(colstd);
+                }
+
+                // loop ends
+
+                // add rown to monthtable
+                monthTable.appendChild(rown);
+
+                // display monthtable on html page
+                var monthDiv = document.getElementById("monthView");
+                monthDiv.innerHTML = "";
+                // add monthtable to monthDiv
+
+                monthDiv.appendChild(monthTable);
+
+            }
+
+			
+		</script>
+	</head>
+	<body>
+        <center>
+		<table border="1" style="border-collapse: collapse;">
+			<tr>
+				<td>Day</td>
+				<td>Month</td>
+				<td>year</td>
+			</tr>
+			<tr>
+				<td><select id="selDay" >
+					<option value="1">1</option>  <option value="2">2</option>  <option value="3">3</option>  <option value="4">4</option>  <option value="5">5</option>
+					<option value="6">6</option>    <option value="7">7</option>   <option value="8">8</option>  <option value="9">9</option>   <option value="10">10</option>
+					<option value="11">11</option>   <option value="12">12</option>  <option value="13">13</option>  <option value="14">14</option>  <option value="15">15</option>
+					<option value="16">16</option>     <option value="17">17</option>  <option value="18">18</option>  <option value="19">19</option>  <option value="20">20</option>
+					<option value="21">21</option>  <option value="22">22</option>  <option value="23">23</option>  <option value="24">24</option>  <option value="25">25</option>
+					<option value="26">26</option>  <option value="27">27</option>  <option value="28">28</option>  <option value="29">29</option>  <option value="30">30</option>
+					<option value="31">31</option>
+				     </select>	
+					</td>
+				<td>
+					<select id="selMonth" >
+					<option value="1">JAN</option>
+					<option value="2">FEB</option>
+					<option value="3">MAR</option>
+					<option value="4">APR</option>
+					<option value="5">MAY</option>
+					<option value="6">JUN</option>
+					<option value="7">JUL</option>
+					<option value="8">AUG</option>
+					<option value="9">SEP</option>
+					<option value="10">OCT</option>
+					<option value="11">NOV</option>
+					<option value="12">DEC</option>
+				     </select>
+				</td>
+				<td><input type="text" id="txtYear" /></td>
+			</tr>
+			<tr>
+				<Td colspan=3>
+				<input type="button" id="btnshow" value="GETDAY" onClick="viewMonth()" />
+				</td>
+			</tr>
+			<tr>
+				<td><span id="result"></span></td>
+			</tr>
+			<tr>
+				<td colspan=3>
+					<div id="monthView"></div>
+				</td>
+			</tr>
+		</table>
+
+    </center>
+	</body>
+</html>
